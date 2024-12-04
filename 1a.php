@@ -3,7 +3,7 @@
 /** @var string[] $input */
 $input = file('input1.txt');
 foreach ($input as $line) {
-    $numbers = $numbers = explode('   ', str_replace("\n", '' , $line));
+    $numbers = explode('   ', str_replace("\n", '' , $line));
     $a[] = $numbers[0];
     $b[] = $numbers[1];
 }
