@@ -20,8 +20,7 @@ foreach ($input as $line) {
             } else {
                 continue 2;
             }
-        }
-        if (($ascOrDesc === 'asc' && $level <= $previousLevel) ||
+        } elseif (($ascOrDesc === 'asc' && $level <= $previousLevel) ||
             ($ascOrDesc === 'desc' && $level >= $previousLevel)) {
             continue 2;
         }
