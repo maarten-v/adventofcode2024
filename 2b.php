@@ -7,11 +7,8 @@ foreach ($input as $line) {
     $levels = explode(' ', str_replace("\n", '' , $line));
     if (isReportValid($levels)) {
         $safeLines++;
-    } else {
-        if (isReportValidWithOneRemoved($levels)) {
-            $safeLines++;
-        }
-
+    } elseif (isReportValidWithOneRemoved($levels)) {
+        $safeLines++;
     }
 }
 
