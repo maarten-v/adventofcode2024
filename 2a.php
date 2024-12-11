@@ -5,6 +5,13 @@ $input = file('input2.txt');
 $safeLines = 0;
 foreach ($input as $line) {
     $levels = explode(' ', str_replace("\n", '' , $line));
+    if (isReportValid($levels)) {
+        $safeLines++;
+    }
+}
+
+function isReportValid(array $levels): bool
+{
     $previousLevel = null;
     $ascOrDesc = null;
     foreach ($levels as $level) {
@@ -18,18 +25,18 @@ foreach ($input as $line) {
             } elseif ($level < $previousLevel) {
                 $ascOrDesc = 'desc';
             } else {
-                continue 2;
+                return false;
             }
         } elseif (($ascOrDesc === 'asc' && $level <= $previousLevel) ||
             ($ascOrDesc === 'desc' && $level >= $previousLevel)) {
-            continue 2;
+            return false;
         }
         if (abs($previousLevel - $level) > 3) {
-            continue 2;
+            return false;
         }
         $previousLevel = $level;
     }
-    $safeLines++;
+    return true;
 }
 
 echo $safeLines;
