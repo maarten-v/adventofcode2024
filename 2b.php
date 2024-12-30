@@ -4,7 +4,7 @@
 $input = file('input2.txt');
 $safeLines = 0;
 foreach ($input as $line) {
-    $levels = explode(' ', str_replace("\n", '' , $line));
+    $levels = explode(' ', $line);
     if (isReportValid($levels)) {
         $safeLines++;
     } elseif (isReportValidWithOneRemoved($levels)) {
