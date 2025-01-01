@@ -7,12 +7,11 @@ foreach ($input as $line) {
     $a[] = $numbers[0];
     $b[] = $numbers[1];
 }
-$count = count($a);
 sort($a);
 sort($b);
 
 $diffs = 0;
-for ($i = 0; $i < $count; $i++) {
-    $diffs += abs($a[$i] - $b[$i]);
+foreach ($a as $index => $currentA) {
+    $diffs += abs($currentA - $b[$index]);
 }
 echo $diffs;

@@ -13,9 +13,8 @@ $begin = substr($line, 0, $stopPosition);
 $total += getAmountFromString($begin);
 
 preg_match_all('/do\(\)\s*(.*?)\s*don\'t\(\)/', $line, $matches);
-$matchCount = count($matches[1]);
-for ($i = 0; $i < $matchCount; $i++) {
-    $total += getAmountFromString($matches[1][$i]);
+foreach ($matches[1] as $match) {
+    $total += getAmountFromString($match);
 }
 
 $lastDoPosition = strrpos($line, 'do()');
@@ -29,10 +28,10 @@ function getAmountFromString(string $matches): int
 {
     $amount = 0;
     preg_match_all('/mul\((\d*),(\d*)\)/', $matches, $subMatches);
-    $subMatchCount = count($subMatches[0]);
-    for ($j = 0; $j < $subMatchCount; $j++) {
-        $amount += $subMatches[1][$j] * $subMatches[2][$j];
+    foreach ($subMatches[1] as $index => $match) {
+        $amount += $match * $subMatches[2][$index];
     }
+
     return $amount;
 }
 

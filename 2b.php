@@ -43,10 +43,9 @@ function isReportValid(array $levels): bool
 
 function isReportValidWithOneRemoved(array $levels): bool
 {
-    $levelCount = count($levels);
-    for ($i = 0; $i < $levelCount; $i++) {
+    foreach($levels as $index => $level) {
         $levelsWithOneRemoved = $levels;
-        unset($levelsWithOneRemoved[$i]);
+        unset($levelsWithOneRemoved[$index]);
         if (isReportValid($levelsWithOneRemoved)) {
             return true;
         }
