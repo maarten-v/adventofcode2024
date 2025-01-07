@@ -13,7 +13,6 @@ const RIGHT = 'right';
 $map = [];
 $posX = null;
 $posY = null;
-$direction = 'up';
 foreach ($input as $inputIndex => $line) {
     $map[] = str_split($line);
     if (is_null($posX) && str_contains($line, '^')) {
@@ -27,7 +26,7 @@ $visited = walkMap($map, $posX, $posY, PHP_INT_MAX);
 $maxSteps = count($visited);
 
 $total = 0;
-foreach ($visited as $location => $stub) {
+foreach (array_keys($visited) as $location) {
     [$obstacleX, $obstacleY] = explode(' ', $location);
     if ((int) $obstacleY === $posY && (int) $obstacleX === $posX) {
         continue;
@@ -45,11 +44,10 @@ function walkMap(array $map, int $posX, int $posY, int $maxSteps): array
 {
     $steps = 0;
     $direction = 'up';
-    $outOfBounds = false;
     $visited = [];
     $maxX = count($map[0]);
     $maxY = count($map);
-    while (!$outOfBounds) {
+    while (true) {
         $steps++;
         if ($steps > ($maxSteps + 1000)) {
             return [];
@@ -65,8 +63,7 @@ function walkMap(array $map, int $posX, int $posY, int $maxSteps): array
             $posX++;
         }
         if ($posX < 0 || $posY < 0 || $posX >= $maxX || $posY >= $maxY) {
-            $outOfBounds = true;
-            continue;
+            return $visited;
         }
         if ($map[$posY][$posX] === '#') {
             if ($direction === UP) {
@@ -84,5 +81,4 @@ function walkMap(array $map, int $posX, int $posY, int $maxSteps): array
             }
         }
     }
-    return $visited;
 }
