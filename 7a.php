@@ -16,7 +16,7 @@ foreach ($input as $line) {
     }
 }
 
-function checkCalculation($result, $leftSideOfCalculation, $numbers): bool
+function checkCalculation(int $result, int $leftSideOfCalculation, array $numbers): bool
 {
     if (count($numbers) === 1) {
         return $leftSideOfCalculation + $numbers[0] === $result || $leftSideOfCalculation * $numbers[0] === $result;
