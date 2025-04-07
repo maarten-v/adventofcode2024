@@ -21,7 +21,7 @@ foreach ($input as $char) {
 }
 
 $outputArray = [];
-[$outputArray, $files] = moveFirstFileToOutput($files, $outputArray);
+moveFirstFileToOutput();
 while (count($spaces) > 0 && count($files) > 0) {
     if ($spaces[0] > max($files)['length']) {
         $outputArray[] = max($files);
@@ -32,13 +32,13 @@ while (count($spaces) > 0 && count($files) > 0) {
         unset($spaces[0]);
         $spaces = array_values($spaces);
         array_pop($files);
-        [$outputArray, $files] = moveFirstFileToOutput($files, $outputArray);
+        moveFirstFileToOutput();
     } else {
         $outputArray[] = ['name' => max($files)['name'], 'length' => $spaces[0]];
         $files[array_key_last($files)]['length'] -= $spaces[0];
         unset($spaces[0]);
         $spaces = array_values($spaces);
-        [$outputArray, $files] = moveFirstFileToOutput($files, $outputArray);
+        moveFirstFileToOutput();
     }
 }
 
@@ -51,8 +51,9 @@ foreach ($outputArray as $output) {
     }
 }
 
-function moveFirstFileToOutput(array $files, array $outputArray): array
+function moveFirstFileToOutput(): array
 {
+    global $files, $outputArray;
     $outputArray[] = $files[0];
     unset($files[0]);
     $files = array_values($files);
