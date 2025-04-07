@@ -10,19 +10,12 @@ $counter = 0;
 $mode = 'files';
 $files = [];
 $spaces = [];
-$output = '';
 foreach ($input as $char) {
     if ($mode === 'files') {
         $files[] = ['name' => $counter, 'length' => (int) $char];
-        foreach (range(1, $char) as $i) {
-            $output .= $counter;
-        }
         $counter++;
     } else {
         $spaces[] = (int) $char;
-        foreach (range(1, $char) as $i) {
-            $output .= '.';
-        }
     }
     $mode = $mode === 'files' ? 'free' : 'files';
 }
