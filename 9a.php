@@ -51,13 +51,12 @@ foreach ($outputArray as $output) {
     }
 }
 
-function moveFirstFileToOutput(): array
+function moveFirstFileToOutput(): void
 {
     global $files, $outputArray;
     $outputArray[] = $files[0];
     unset($files[0]);
     $files = array_values($files);
-    return [$outputArray, $files];
 }
 
 echo $result;
