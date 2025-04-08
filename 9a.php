@@ -27,19 +27,14 @@ while (count($spaces) > 0 && count($files) > 0) {
         $outputArray[] = max($files);
         $spaces[0] -= max($files)['length'];
         array_pop($files);
-    } elseif ($spaces[0] === max($files)['length']) {
-        $outputArray[] = max($files);
-        unset($spaces[0]);
-        $spaces = array_values($spaces);
-        array_pop($files);
-        moveFirstFileToOutput();
-    } else {
-        $outputArray[] = ['name' => max($files)['name'], 'length' => $spaces[0]];
-        $files[array_key_last($files)]['length'] -= $spaces[0];
-        unset($spaces[0]);
-        $spaces = array_values($spaces);
-        moveFirstFileToOutput();
+
+        continue;
     }
+    $outputArray[] = ['name' => max($files)['name'], 'length' => $spaces[0]];
+    $files[array_key_last($files)]['length'] -= $spaces[0];
+    unset($spaces[0]);
+    $spaces = array_values($spaces);
+    moveFirstFileToOutput();
 }
 
 $result = 0;
